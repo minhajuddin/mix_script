@@ -34,11 +34,10 @@ mix_script compile ~/scripts/elixir_curl.exs
 ## Installation
 
 ```
-git clone https://github.com/minhajuddin/mix_script
-cd mix_script
-mix escript.build
-# this will generate the ./mix_script binary
+mix escript.install hex mix_script
 ```
+
+**This will install the binary into your `$HOME/.mix/escripts` directory, so make sure that is part of your `$PATH`**
 
 ## TODO
   [  ] Make this more efficient by using a common directory for the mix packages
