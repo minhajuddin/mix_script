@@ -3,6 +3,12 @@ defmodule MixScript.Mixfile do
 
   def project do
     [app: :mix_script,
+     name: "MixScript",
+     description: description,
+     package: package,
+     docs: [
+       extras: ~W(README.md)
+     ],
      version: "0.1.0",
      elixir: "~> 1.4",
      escript: [main_module: MixScript],
@@ -29,6 +35,28 @@ defmodule MixScript.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:credo, "~> 0.4", only: [:dev, :test]},
+    ]
+  end
+
+  defp description do
+    """
+    A build utility that allows you to to use mix packages in an elixir script.
+    """
+  end
+
+  defp package do
+    [
+      description: description,
+      files: ~w(lib config mix.exs README.md LICENSE),
+      maintainers: ["Khaja Minhajuddin"],
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "http://github.com/minhajuddin/mix_script",
+        "Docs"   => "http://hexdocs.pm/mix_script",
+      }
+    ]
   end
 end

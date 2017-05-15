@@ -1,6 +1,6 @@
 # MixScript
 
-Allows you to use mix packages in an elixir script.
+A build utility that allows you to to use mix packages in an elixir script.
 
 ## Example
 
