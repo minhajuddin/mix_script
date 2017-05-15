@@ -4,8 +4,8 @@ defmodule MixScript.Mixfile do
   def project do
     [app: :mix_script,
      name: "MixScript",
-     description: description,
-     package: package,
+     description: description(),
+     package: package(),
      docs: [
        extras: ~W(README.md)
      ],
@@ -49,7 +49,7 @@ defmodule MixScript.Mixfile do
 
   defp package do
     [
-      description: description,
+      description: description(),
       files: ~w(lib config mix.exs README.md LICENSE),
       maintainers: ["Khaja Minhajuddin"],
       licenses: ["MIT"],

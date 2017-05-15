@@ -56,7 +56,7 @@ defmodule MixScript do
     :ok
   end
 
-  defp exec(cmd, args \\ [], opts \\ []) do
+  defp exec(cmd, args, opts \\ []) do
     info "executing: #{inspect cmd} with args #{inspect args}"
     case System.cmd(cmd, args, opts) do
       {output, 0} ->
