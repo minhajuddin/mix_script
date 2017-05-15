@@ -39,3 +39,7 @@ cd mix_script
 mix escript.build
 # this will generate the ./mix_script binary
 ```
+
+## TODO
+  [  ] Make this more efficient by using a common directory for the mix packages
+  [  ] Make it usable via a shebang `#!/usr/bin/env mix_script` which does compilation and execution

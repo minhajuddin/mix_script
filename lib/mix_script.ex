@@ -7,7 +7,8 @@ defmodule MixScript do
       {:ok, tmp_dir} <- create_tmp_dir([mix_deps, mix_script]),
       :ok <- create_mix_project(mix_deps, mix_script, tmp_dir),
       target_file = mix_script_filepath |> Path.absname |> Path.rootname,
-      :ok <- compile_mix_project(tmp_dir, target_file) do
+      :ok <- compile_mix_project(tmp_dir, target_file),
+      File.rm_rf!(tmp_dir) do
         IO.puts("compiled mix_script")
     else
       err ->
