@@ -9,7 +9,7 @@ defmodule MixScript.Mixfile do
      docs: [
        extras: ~W(README.md)
      ],
-     version: "0.1.0",
+     version: "0.2.0",
      elixir: "~> 1.4",
      escript: [main_module: MixScript],
      build_embedded: Mix.env == :prod,
