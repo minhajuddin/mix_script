@@ -8,7 +8,7 @@ defmodule MixScript do
       :ok <- create_mix_project(mix_deps, mix_script, tmp_dir),
       target_file = mix_script_filepath |> Path.absname |> Path.rootname,
       :ok <- compile_mix_project(tmp_dir, target_file),
-      File.rm_rf!(tmp_dir) do
+      :ok <- cleanup_tmp_dir(tmp_dir) do
         IO.puts("compiled mix_script")
     else
       err ->
@@ -107,6 +107,12 @@ defmodule MixScript do
     exec("mix", ~w(deps.get), cd: dir)
     exec("mix", ~w(escript.build), cd: dir)
     File.cp!(Path.join(dir, "mix_script"), target_file)
+  end
+
+  defp cleanup_tmp_dir(tmp_dir) do
+    info "removing tmp dir #{tmp_dir}"
+    File.rm_rf!(tmp_dir)
+    :ok
   end
 
 end
