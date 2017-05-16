@@ -40,5 +40,5 @@ mix escript.install hex mix_script
 **This will install the binary into your `$HOME/.mix/escripts` directory, so make sure that is part of your `$PATH`**
 
 ## TODO
-  [  ] Make this more efficient by using a common directory for the mix packages
-  [  ] Make it usable via a shebang `#!/usr/bin/env mix_script` which does compilation and execution
+  - [ ] Make this more efficient by using a common directory for the mix packages
+  - [ ] Make it usable via a shebang `#!/usr/bin/env mix_script` which does compilation and execution
