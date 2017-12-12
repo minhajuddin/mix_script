@@ -36,15 +36,21 @@ defmodule MixScript do
     mix_exs_path
     |> File.stream!
     |> Enum.to_list
-    |> Enum.reduce({"", []}, fn line, {prev_line, acc} ->
-      line_to_be_appended =
+    |> Enum.reduce({"", [], false}, fn line, {prev_line, acc, prev_removed} ->
+      prev_starts_deps = String.contains?(prev_line, "defp deps do")
+      curr_ends_func = line == "  end\n"
+      remove_curr = (prev_starts_deps or prev_removed) and not curr_ends_func
+      result =
         cond do
-          String.contains?(prev_line, "defp deps do") -> mix_deps
-          Regex.match?(~r[^\s*elixir: ".*",\s*$],prev_line) -> "escript: [main_module: MixScript],\n"
-          true -> line
+          prev_starts_deps and curr_ends_func -> [mix_deps | [line | acc]]
+          prev_starts_deps -> [mix_deps | acc]
+          remove_curr -> acc
+          Regex.match?(~r[^\s*elixir: ".*",\s*$], prev_line) ->
+            escript_line = "escript: [main_module: MixScript],\n"
+            [escript_line | [line | acc]]
+          true -> [line | acc]
         end
-
-      {line, [line_to_be_appended | acc]}
+      {line, result, remove_curr}
     end)
     |> elem(1)
     |> Enum.reverse
